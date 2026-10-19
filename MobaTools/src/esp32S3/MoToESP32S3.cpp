@@ -1,0 +1,105 @@
+// ESP32 HW-spcific Functions
+#define debugTP
+//#define debugPrint
+#include <MobaTools.h>
+#ifdef IS_ESP32S
+
+#if MESSAGES > 0  
+#pragma message "compiling MoToESP32S3.cpp"
+#endif
+
+bool spiInitialized = false;
+void IRAM_ATTR stepperISR(nextCycle_t cyclesLastIRQ)  __attribute__ ((weak));
+void softledISR(nextCycle_t cyclesLastIRQ)  __attribute__ ((weak));
+nextCycle_t nextCycle;
+static nextCycle_t cyclesLastIRQ = 1;  // cycles since last IRQ
+uint64_t lastAlarm, aktAlarm;
+
+void IRAM_ATTR ISR_Stepper(void) {
+    // Timer running up, used for stepper motor. No reload of timer
+    SET_TP1;
+    nextCycle = ISR_IDLETIME  / CYCLETIME ;// min ist one cycle per IDLETIME
+    portENTER_CRITICAL_ISR(&stepperMux);
+    cyclesLastIRQ = (aktAlarm - lastAlarm) / TICS_PER_MICROSECOND;
+    if ( stepperISR ) stepperISR(cyclesLastIRQ);
+    //============  End of steppermotor ======================================
+	CLR_TP1;
+    if ( softledISR ) softledISR(cyclesLastIRQ);
+    // ======================= end of softleds =====================================
+	SET_TP1;
+	// next alarm ISR must be at least MIN_STEP_CYCLE/2 beyond last alarm value ( time between to ISR's )
+    lastAlarm = aktAlarm;
+    aktAlarm = lastAlarm+(nextCycle*TICS_PER_MICROSECOND); // minimumtime until next Interrupt
+    uint64_t minNextAlarm = lastAlarm + (MIN_STEP_CYCLE*TICS_PER_MICROSECOND/2);
+	if ( aktAlarm < minNextAlarm ) {
+		// time till next ISR ist too short, set to mintime and adjust nextCycle
+        CLR_TP1;
+		aktAlarm =  minNextAlarm;
+	}
+	#if (ESP_ARDUINO_VERSION_MAJOR == 2)
+     timerAlarmWrite(stepTimer, aktAlarm , false); // no autorelaod
+     timerAlarmEnable(stepTimer);
+	#elif (ESP_ARDUINO_VERSION_MAJOR == 3)
+    //3.0.3 void timerAlarm(hw_timer_t * timer, uint64_t alarm_value, bool autoreload, uint64_t reload_count);
+    timerAlarm(stepTimer, aktAlarm , false, 0); // no autorelaod, 0=unlimited - zs6buj
+	#else
+		 #error "ESP-core version unsupported"
+    #endif
+    SET_TP2;
+    portEXIT_CRITICAL_ISR(&stepperMux);
+	CLR_TP2;
+    CLR_TP1; // Oszimessung Dauer der ISR-Routine
+}
+////////////////////////////////////////////////////////////////////////////////////////////
+//timerConfig_t timerConfig;
+portMUX_TYPE stepperMux = portMUX_INITIALIZER_UNLOCKED;
+portMUX_TYPE servoMux = portMUX_INITIALIZER_UNLOCKED;
+portMUX_TYPE softledMux = portMUX_INITIALIZER_UNLOCKED;
+// Because there is only one Alarmreg per timer, we need two distinct timer for stepper and servo
+hw_timer_t * stepTimer = NULL;
+hw_timer_t * servoTimer = NULL; // The servoTimer is initialized _inline_ in MoToESP32S3.h
+
+void seizeTimerAS() {
+    // Initiieren des Stepper + Softled Timers ------------------------
+	static bool stepperTimerInitialized = false;
+	DB_PRINT("Servotimer initialize = %d\n\r", stepperTimerInitialized);
+    if ( !stepperTimerInitialized ) {
+		#if (ESP_ARDUINO_VERSION_MAJOR == 2)
+			#pragma message "Info: using esp core 2.x.x"
+        stepTimer = timerBegin(STEPPER_TIMER, DIVIDER, true); // true= countup
+        timerAttachInterrupt(stepTimer, &ISR_Stepper, true);  // true= edge Interrupt
+        timerAlarmWrite(stepTimer, ISR_IDLETIME*TICS_PER_MICROSECOND , false); // false = no autoreload );
+        timerAlarmEnable(stepTimer);
+		#elif (ESP_ARDUINO_VERSION_MAJOR == 3)
+			#pragma message "Info: using esp core 3.x.x"
+        // core 3.0.3 hw_timer_t * timerBegin(uint32_t frequency);   // frequency in Hz    
+		stepTimer = timerBegin(2000000);  // frequency
+        // core 3.0.3void timerAttachInterrupt(hw_timer_t * timer, void (*userFunc)(void));
+        timerAttachInterrupt(stepTimer, &ISR_Stepper); // assume edge - zs6buj
+        timerAlarm(stepTimer, ISR_IDLETIME*TICS_PER_MICROSECOND , false, 0); // false = no autoreload );
+		#else
+		 #error "ESP-core version unsupported"
+		#endif
+		aktAlarm = ISR_IDLETIME*TICS_PER_MICROSECOND; // time of first alarm
+		DB_PRINT("aA=%ld, lA=%ld\n\r",aktAlarm, lastAlarm);
+		DB_PRINT("Step-Timer eingerichtet\n\r");	
+        stepperTimerInitialized = true;  
+        MODE_TP1;   // set debug-pins to Output
+        MODE_TP2;
+        MODE_TP3;
+        MODE_TP4;
+    }
+}
+
+
+
+void enableServoIsrAS() {
+}
+
+
+void enableSoftLedIsrAS() {
+
+}
+
+
+#endif

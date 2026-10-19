@@ -1,0 +1,518 @@
+{
+  "version": "1.00",
+  "projectName": "Project description",
+  "author": "dave",
+  "items": [
+    {
+      "parentId": 0,
+      "type": "analogItem",
+      "defaultValue": "222",
+      "item": {
+        "maxValue": 1000,
+        "offset": 0,
+        "divisor": 10,
+        "unitName": "%menu.1.unit",
+        "step": 1,
+        "name": "%menu.1.name",
+        "variableName": "Analog",
+        "id": 1,
+        "eepromAddress": -1,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "floatItem",
+      "defaultValue": "33.123",
+      "item": {
+        "numDecimalPlaces": 3,
+        "name": "%menu.2.name",
+        "variableName": "Float",
+        "id": 2,
+        "eepromAddress": -1,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "enumItem",
+      "defaultValue": "0",
+      "item": {
+        "enumEntries": [
+          "%menu.3.enum.0",
+          "%menu.3.enum.1",
+          "%menu.3.enum.2"
+        ],
+        "name": "%menu.3.name",
+        "variableName": "Enum",
+        "id": 3,
+        "eepromAddress": -1,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "boolItem",
+      "defaultValue": "false",
+      "item": {
+        "naming": "ON_OFF",
+        "name": "Power",
+        "variableName": "Power",
+        "id": 4,
+        "eepromAddress": -1,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "subMenu",
+      "item": {
+        "secured": false,
+        "name": "%menu.5.name",
+        "variableName": "Settings",
+        "id": 5,
+        "eepromAddress": -1,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 5,
+      "type": "actionMenu",
+      "item": {
+        "name": "Action",
+        "variableName": "SettingsAction",
+        "id": 6,
+        "eepromAddress": -1,
+        "functionName": "onSettingsAction",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 5,
+      "type": "rgbItem",
+      "defaultValue": "#000000FF",
+      "item": {
+        "includeAlphaChannel": false,
+        "name": "%menu.7.name",
+        "variableName": "SettingsRGB",
+        "id": 7,
+        "eepromAddress": -1,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 5,
+      "type": "boolItem",
+      "defaultValue": "false",
+      "item": {
+        "naming": "YES_NO",
+        "name": "%menu.8.name",
+        "variableName": "SettingsYesNo",
+        "id": 8,
+        "eepromAddress": -1,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 5,
+      "type": "boolItem",
+      "defaultValue": "false",
+      "item": {
+        "naming": "CHECKBOX",
+        "name": "CheckBox",
+        "variableName": "SettingsCheckBox",
+        "id": 9,
+        "eepromAddress": -1,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    }
+  ],
+  "codeOptions": {
+    "embeddedPlatform": "ARDUINO32",
+    "lastDisplayUuid": "4dcb12ec-13d8-4466-b8b6-bd575eae4612",
+    "lastInputUuid": "71DAF854-DF8D-4F0B-9039-23C5583C85B1",
+    "lastRemoteUuids": [
+      "1e38dc42-672d-4c1c-a393-2c7632bf6c5c"
+    ],
+    "lastThemeUuid": "1947F585-9D36-448C-8A80-B425686107BD",
+    "applicationUUID": "0ad4bdde-34a4-4507-912e-b495b0eac2c1",
+    "applicationName": "%project.name",
+    "lastProperties": [
+      {
+        "name": "DISPLAY_VARIABLE",
+        "latestValue": "gfx",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_TYPE",
+        "latestValue": "Adafruit_ILI9341",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_WIDTH",
+        "latestValue": "320",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_HEIGHT",
+        "latestValue": "240",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_RESET_PIN",
+        "latestValue": "13",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_CS_PIN",
+        "latestValue": "10",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_RS_PIN",
+        "latestValue": "11",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_DATA_PIN",
+        "latestValue": "-1",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_CLOCK_PIN",
+        "latestValue": "-1",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "ST7735_TAB_TYPE",
+        "latestValue": "INITR_BLACKTAB",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_ROTATION",
+        "latestValue": "1",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "UPDATES_PER_SEC",
+        "latestValue": "5",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_BUFFER_SIZE",
+        "latestValue": "40",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_CUSTOM_SPI_NAME",
+        "latestValue": "SPI1",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "MK_KEYBOARD_NEXT",
+        "latestValue": "9",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_KEYBOARD_BACK",
+        "latestValue": "0",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_KEYBOARD_ENTER",
+        "latestValue": "*",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_KEYBOARD_DEL",
+        "latestValue": "#",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_KEYBOARD_LAYOUT",
+        "latestValue": "LAYOUT_3X4",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_ROW_PIN_0",
+        "latestValue": "22",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_ROW_PIN_1",
+        "latestValue": "21",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_ROW_PIN_2",
+        "latestValue": "20",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_ROW_PIN_3",
+        "latestValue": "19",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_COL_PIN_0",
+        "latestValue": "18",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_COL_PIN_1",
+        "latestValue": "17",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_COL_PIN_2",
+        "latestValue": "16",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_COL_PIN_3",
+        "latestValue": "-1",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_KEYBOARD_DEVICE",
+        "latestValue": "devicePins",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_REPEAT_START",
+        "latestValue": "850",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_REPEAT_INTERVAL",
+        "latestValue": "350",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_KEYBOARD_INTERRUPTS",
+        "latestValue": "false",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "SEPARATOR",
+        "latestValue": "",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_NEED_ENCODER",
+        "latestValue": "false",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_USE_PULL_UP",
+        "latestValue": "true",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_ENCODER_A",
+        "latestValue": "-1",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_ENCODER_B",
+        "latestValue": "-1",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_ENCODER_SEL",
+        "latestValue": "-1",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_ENCODER_DEVICE",
+        "latestValue": "devicePins",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_POLLING_MODE",
+        "latestValue": "SWITCHES_POLL_EVERYTHING",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "MK_ENCODER_TYPE",
+        "latestValue": "FULL_CYCLE",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "SERIAL_PORT",
+        "latestValue": "Serial",
+        "subsystem": "REMOTE"
+      },
+      {
+        "name": "ITEM_FONT",
+        "latestValue": "ada:OpenSansRegular18pt,0",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "TITLE_FONT",
+        "latestValue": "ada:RobotoMedium24,0",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "TITLE_SHOW_MODE",
+        "latestValue": "TITLE_FIRST_ROW",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "USE_TC_UNICODE",
+        "latestValue": "true",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "NEED_EDITING_ICONS",
+        "latestValue": "false",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "DISPLAY_SEPARATOR_DISP",
+        "latestValue": "",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "PINS_SEPARATOR_DISP",
+        "latestValue": "",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "OTHER_SEPARATOR_DISP",
+        "latestValue": "",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_SPI_SPEED",
+        "latestValue": "0",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_DOUBLE_BUFFER_SEP_SEPARATOR_DISP",
+        "latestValue": "",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_DOUBLE_BUFFER",
+        "latestValue": "4BPP",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "FONT_SEPARATOR_DISP",
+        "latestValue": "",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "THEME_ITEM_FONT",
+        "latestValue": "tca:RobotoRegular16pt,0",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "THEME_TITLE_FONT",
+        "latestValue": "tca:RobotoMedium24,0",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "SPACING_SEPARATOR_DISP",
+        "latestValue": "",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "TITLE_PADDING",
+        "latestValue": "2",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "ITEM_PADDING",
+        "latestValue": "2",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "TITLE_TO_ITEM_SPACING",
+        "latestValue": "2",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "THEME_ACTION_ROUND_CORNER",
+        "latestValue": "0",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "THEME_TITLE_ROUND_CORNER",
+        "latestValue": "4",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "THEME_EXTRA_DRAWING_SEPARATOR_DISP",
+        "latestValue": "",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "THEME_EDIT_ICONS",
+        "latestValue": "MED_RES",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "THEME_BUTTON_ALIGNMENT",
+        "latestValue": "JUSTIFY_TITLE_LEFT_WITH_VALUE",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "THEME_USE_SLIDERS_ANALOG",
+        "latestValue": "false",
+        "subsystem": "THEME"
+      }
+    ],
+    "namingRecursive": true,
+    "useCppMain": false,
+    "saveLocation": "ONE_SINGLE_FILE",
+    "useDynamicMenus": false,
+    "usingSizedEEPROMStorage": false,
+    "eepromSaveMode": "LEGACY_WRITE_BY_POSITION",
+    "eepromDefinition": "",
+    "authenticatorDefinition": "",
+    "projectIoExpanders": [
+      "deviceIO:"
+    ],
+    "menuInMenuCollection": {
+      "menuDefinitions": []
+    }
+  },
+  "stringLists": []
+}

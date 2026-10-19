@@ -1,0 +1,90 @@
+/*
+ * This file demonstrates the full use of the dashboard support built into TcMenu core, you can easily create and layout
+ * your own dashboards.
+ *
+ * https://www.thecoderscorner.com/products/arduino-libraries/tc-menu/renderer-take-over-display/#3-using-the-drawabledashboard-to-draw-a-dashboard
+ */
+#include "dashboardSetup.h"
+#include "Fonts/RobotoMonoBold60pt.h"
+#include <Fonts/FreeSans18pt7b.h>
+#include <Fonts/FreeSans9pt7b.h>
+
+DrawableDashboard* dashCustomDrawing;
+CustomDashboardDelegate dashboardDelegate;
+
+bool CustomDashboardDelegate::dashboardWillOpen(BaseMenuRenderer *renderer) {
+    ledsChanged = true;
+    for (uint16_t &ledState : ledColors) ledState = 0;
+    return false;
+}
+
+void CustomDashboardDelegate::setLed(int i, uint16_t color) {
+    if (i < 0 || i > LED_STATES) return;
+    ledColors[i] = color;
+    ledsChanged = true;
+}
+
+void CustomDashboardDelegate::dashboardDidDraw(unsigned int encVal, RenderPressMode pressMode) {
+    if(!ledsChanged) return;
+    ledsChanged = false;
+    int widthOfOneLed = renderer.getDeviceDrawable()->getDisplayDimensions().x / LED_STATES;
+    int startX = widthOfOneLed / 2;
+
+    for (uint16_t ledState : ledColors) {
+        renderer.getDeviceDrawable()->setDrawColor(ledState);
+        renderer.getDeviceDrawable()->drawCircle(Coord(startX, 12), 11, true);
+        startX += widthOfOneLed;
+    }
+}
+
+// Drawing parameters are used to tell each item how to paint onto the display, they range from simple DashDrawParameters
+// that always draw in the same color, DashDrawParametersUpdate that also highlights the item when updated for a moment,
+// DashDrawParametersIntUpdateRange that can change colors when certain ranges are met, and finally a text matching
+// DashDrawParametersTextUpdateRange that changes color for certain string matches.
+DashDrawParametersIntUpdateRange::IntColorRange const rpmRanges[] = {
+        { RGB_COL_GREEN, RGB_COL_BLACK, 7000, 13000},
+        { RGB_COL_ORANGE, RGB_COL_BLACK, 13000, 14000 },
+        { RGB_COL_RED, RGB_COL_YELLOW , 14000, 20000},
+};
+DashDrawParametersIntUpdateRange rpmDrawParams(ILI9341_WHITE, ILI9341_BLACK, ILI9341_WHITE, ILI9341_BLACK, &FreeSans18pt7b, rpmRanges, 3);
+
+DashDrawParametersTextUpdateRange::TextColorOverride const gearRanges[] = {
+        { "R", RGB_COL_GREEN, RGB_COL_BLACK },
+        { "N", RGB_COL_ORANGE, RGB_COL_BLACK }
+};
+DashDrawParametersTextUpdateRange gearDrawParams(ILI9341_WHITE, ILI9341_BLACK, ILI9341_WHITE, ILI9341_PURPLE, &RobotoMono_SemiBold60pt7b,
+                                                 gearRanges, 2, DashDrawParameters::NO_TITLE_VALUE_LEFT);
+
+DashDrawParameters white18ptNoUpdate(RGB_COL_WHITE, RGB_COL_BLACK, &FreeSans18pt7b);
+
+DashDrawParametersUpdate white18ptUpdateRightParam(RGB_COL_WHITE, RGB_COL_BLACK, RGB_COL_CYAN, RGB_COL_PURPLE, &FreeSans18pt7b);
+
+DashDrawParametersUpdate yellow9PtUpdateLeft(RGB_COL_YELLOW, RGB_COL_BLACK, RGB_COL_CYAN, RGB_COL_PURPLE,
+                                             &FreeSans9pt7b, DashDrawParameters::TITLE_LEFT_VALUE_LEFT);
+DashDrawParametersUpdate yellow9PtUpdateRight(RGB_COL_YELLOW, RGB_COL_BLACK, RGB_COL_CYAN, RGB_COL_PURPLE,
+                                              &FreeSans9pt7b, DashDrawParameters::TITLE_LEFT_VALUE_RIGHT);
+
+//
+// We then add each drawing item to the dashboard that we created earlier in the constructor. For each item, we need to provide:
+// * pointer to the menu item that will have its value displayed
+// * the left, top coordinate as a Coord
+// * one of the drawing parameters as declared above
+// * the number of characters spacing required for the value
+// * optionally, text to override the menu name for the title
+//
+void setupDashboard() {
+    serdebugF("Starting dashboard setup");
+    dashCustomDrawing = new DrawableDashboard(renderer.getDeviceDrawable(), &renderer, nullptr, DrawableDashboard::DASH_ON_RESET_CLICK_EXIT);
+    dashCustomDrawing->clearItems();
+    dashCustomDrawing->addDrawingItem(&menuGear, Coord(15, 50), &gearDrawParams, 1);
+    dashCustomDrawing->addDrawingItem(&menuTyreTemp, Coord(125, 125), &white18ptUpdateRightParam, 5, "TMP");
+    dashCustomDrawing->addDrawingItem(&menuRPM, Coord(125, 45), &rpmDrawParams, 5);
+    dashCustomDrawing->addDrawingItem(&menuSpeed, Coord(125, 85), &white18ptNoUpdate, 5, "MPH");
+    dashCustomDrawing->addDrawingItem(&menuDashboard, Coord(5, 215), &yellow9PtUpdateLeft, 10);
+    dashCustomDrawing->addDrawingItem(&menuLap, Coord(200, 215), &yellow9PtUpdateRight, 5);
+    dashCustomDrawing->setDelegate(&dashboardDelegate);
+    serdebugF("Finished dash setup");
+
+    renderer.setCustomDrawingHandler(dashCustomDrawing);
+    serdebugF("Registered dash");
+}

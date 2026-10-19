@@ -1,0 +1,642 @@
+{
+  "version": "1.00",
+  "projectName": "eInk demonstration with digital joystick",
+  "author": "dave",
+  "items": [
+    {
+      "parentId": 0,
+      "type": "actionMenu",
+      "item": {
+        "name": "Hibernate",
+        "variableName": "Hibernate",
+        "id": 21,
+        "eepromAddress": -1,
+        "functionName": "onHibernate",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "analogItem",
+      "defaultValue": "0",
+      "item": {
+        "maxValue": 100,
+        "offset": 0,
+        "divisor": 1,
+        "unitName": "%",
+        "step": 1,
+        "name": "Int Edit",
+        "variableName": "IntEdit",
+        "id": 1,
+        "eepromAddress": 2,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "analogItem",
+      "defaultValue": "0",
+      "item": {
+        "maxValue": 1000,
+        "offset": 0,
+        "divisor": 10,
+        "unitName": "oC",
+        "step": 1,
+        "name": "Dec Edit",
+        "variableName": "DecEdit",
+        "id": 2,
+        "eepromAddress": 4,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "analogItem",
+      "defaultValue": "0",
+      "item": {
+        "maxValue": 200,
+        "offset": 0,
+        "divisor": 2,
+        "unitName": "",
+        "step": 1,
+        "name": "Halves",
+        "variableName": "Halves",
+        "id": 3,
+        "eepromAddress": 6,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "enumItem",
+      "defaultValue": "0",
+      "item": {
+        "enumEntries": [
+          "Pizza",
+          "Pasta",
+          "Salad",
+          "Pie"
+        ],
+        "name": "Foods",
+        "variableName": "Foods",
+        "id": 4,
+        "eepromAddress": 8,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "boolItem",
+      "defaultValue": "false",
+      "item": {
+        "naming": "YES_NO",
+        "name": "Door Open",
+        "variableName": "DoorOpen",
+        "id": 5,
+        "eepromAddress": 10,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "subMenu",
+      "item": {
+        "secured": false,
+        "name": "Extras",
+        "variableName": "Extras",
+        "id": 10,
+        "eepromAddress": -1,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 10,
+      "type": "textItem",
+      "defaultValue": "",
+      "item": {
+        "textLength": 5,
+        "itemType": "PLAIN_TEXT",
+        "name": "Text",
+        "variableName": "ExtrasText",
+        "id": 11,
+        "eepromAddress": 11,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 10,
+      "type": "rgbItem",
+      "defaultValue": "#000000FF",
+      "item": {
+        "includeAlphaChannel": false,
+        "name": "Color",
+        "variableName": "ExtrasColor",
+        "id": 12,
+        "eepromAddress": 16,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 10,
+      "type": "runtimeList",
+      "item": {
+        "initialRows": 0,
+        "listCreationMode": "CUSTOM_RTCALL",
+        "name": "My List",
+        "variableName": "ExtrasMyList",
+        "id": 13,
+        "eepromAddress": -1,
+        "functionName": "onListSelected",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "subMenu",
+      "item": {
+        "secured": false,
+        "name": "Connectivity",
+        "variableName": "Connectivity",
+        "id": 14,
+        "eepromAddress": -1,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 14,
+      "type": "textItem",
+      "defaultValue": "",
+      "item": {
+        "textLength": 22,
+        "itemType": "PLAIN_TEXT",
+        "name": "SSID",
+        "variableName": "ConnectivitySSID",
+        "id": 16,
+        "eepromAddress": 20,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 14,
+      "type": "textItem",
+      "defaultValue": "",
+      "item": {
+        "textLength": 22,
+        "itemType": "PLAIN_TEXT",
+        "name": "Passcode",
+        "variableName": "ConnectivityPasscode",
+        "id": 17,
+        "eepromAddress": 42,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 14,
+      "type": "enumItem",
+      "defaultValue": "0",
+      "item": {
+        "enumEntries": [
+          "Station",
+          "Soft AP"
+        ],
+        "name": "WiFi Mode",
+        "variableName": "ConnectivityWiFiMode",
+        "id": 18,
+        "eepromAddress": 64,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 14,
+      "type": "textItem",
+      "defaultValue": "",
+      "item": {
+        "textLength": 5,
+        "itemType": "IP_ADDRESS",
+        "name": "IP Address",
+        "variableName": "ConnectivityIPAddress",
+        "id": 15,
+        "eepromAddress": -1,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 14,
+      "type": "customBuildItem",
+      "item": {
+        "menuType": "REMOTE_IOT_MONITOR",
+        "name": "IoT Monitor",
+        "variableName": "ConnectivityIoTMonitor",
+        "id": 19,
+        "eepromAddress": -1,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": true,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 14,
+      "type": "customBuildItem",
+      "item": {
+        "menuType": "AUTHENTICATION",
+        "name": "Authenticator",
+        "variableName": "ConnectivityAuthenticator",
+        "id": 20,
+        "eepromAddress": -1,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": true,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 0,
+      "type": "subMenu",
+      "item": {
+        "secured": false,
+        "name": "IoT Setup",
+        "variableName": "",
+        "id": 22,
+        "eepromAddress": -1,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 22,
+      "type": "textItem",
+      "defaultValue": "",
+      "item": {
+        "textLength": 5,
+        "itemType": "IP_ADDRESS",
+        "name": "IP Addr",
+        "variableName": "",
+        "id": 23,
+        "eepromAddress": -1,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": false,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    },
+    {
+      "parentId": 22,
+      "type": "customBuildItem",
+      "item": {
+        "menuType": "REMOTE_IOT_MONITOR",
+        "name": "IoT Monitor1",
+        "variableName": "",
+        "id": 24,
+        "eepromAddress": -1,
+        "functionName": "",
+        "readOnly": false,
+        "localOnly": true,
+        "visible": true,
+        "staticDataInRAM": false
+      }
+    }
+  ],
+  "codeOptions": {
+    "embeddedPlatform": "ARDUINO_ESP32",
+    "lastDisplayUuid": "cfe4e465-451b-47d8-b026-3be79ecf1cd3",
+    "lastInputUuid": "2a3ae3ba-05f4-4c9c-aad3-3ddc88df9049",
+    "lastRemoteUuids": [
+      "46c30011-cac6-4598-a7b8-b0630d55daab"
+    ],
+    "lastThemeUuid": "D88EC638-8E17-4D23-8CCC-A99A836D3C2C",
+    "applicationUUID": "b447b433-fe4f-4ce7-8746-d94bfeefc707",
+    "applicationName": "ESP32 S2 eInk",
+    "lastProperties": [
+      {
+        "name": "DISPLAY_TYPE",
+        "latestValue": "GxEPD2_154_GDEY0154D67",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "PINS_SEPARATOR_DISP",
+        "latestValue": "",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_RESET_PIN",
+        "latestValue": "15",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_CS_PIN",
+        "latestValue": "13",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_DC_PIN",
+        "latestValue": "14",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_BUSY_PIN",
+        "latestValue": "16",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "GEN_SETTINGS_SEPARATOR_DISP",
+        "latestValue": "",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "UPDATES_PER_SEC",
+        "latestValue": "1",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_ROTATION",
+        "latestValue": "0",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "CTOR_OPTS_SEPARATOR_DISP",
+        "latestValue": "",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "EINK_RESET_DELAY",
+        "latestValue": "10",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "EINK_RESET_PULLDOWN",
+        "latestValue": "false",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "DISPLAY_VARIABLE",
+        "latestValue": "display",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "SW_POLLING_MODE",
+        "latestValue": "SWITCHES_POLL_EVERYTHING",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "SWITCH_IODEVICE",
+        "latestValue": "devicePins",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "ENCODER_UP_PIN",
+        "latestValue": "1",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "ENCODER_DOWN_PIN",
+        "latestValue": "2",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "ENCODER_BACK_PIN",
+        "latestValue": "3",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "ENCODER_NEXT_PIN",
+        "latestValue": "4",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "ENCODER_OK_PIN",
+        "latestValue": "-1",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "ENC_KEY_REPEAT",
+        "latestValue": "20",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "PULLUP_LOGIC",
+        "latestValue": "true",
+        "subsystem": "INPUT"
+      },
+      {
+        "name": "ESPWIFI_CONCURRENT_CONNECTIONS",
+        "latestValue": "1",
+        "subsystem": "REMOTE"
+      },
+      {
+        "name": "ESPWIFI_LISTEN_PORT1",
+        "latestValue": "3333",
+        "subsystem": "REMOTE"
+      },
+      {
+        "name": "ESPWIFI_LISTEN_PORT2",
+        "latestValue": "3334",
+        "subsystem": "REMOTE"
+      },
+      {
+        "name": "ESPWIFI_LISTEN_PORT3",
+        "latestValue": "3335",
+        "subsystem": "REMOTE"
+      },
+      {
+        "name": "ESPWIFI_BUFFERED",
+        "latestValue": "true",
+        "subsystem": "REMOTE"
+      },
+      {
+        "name": "FONT_SEPARATOR_DISP",
+        "latestValue": "",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "THEME_ITEM_FONT",
+        "latestValue": "tca:OpenSansRegular12pt,0",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "THEME_TITLE_FONT",
+        "latestValue": "tca:OpenSansRegular14pt,0",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "SPACING_SEPARATOR_DISP",
+        "latestValue": "",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "TITLE_PADDING",
+        "latestValue": "2",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "ITEM_PADDING",
+        "latestValue": "2",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "TITLE_TO_ITEM_SPACING",
+        "latestValue": "2",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "TITLE_SHOW_MODE",
+        "latestValue": "TITLE_FIRST_ROW",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "USE_TC_UNICODE",
+        "latestValue": "true",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "COLORS_SEPARATOR_DISP",
+        "latestValue": "",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "THEME_COLOR_ITEM_FG",
+        "latestValue": "GxEPD_BLACK",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "THEME_COLOR_ITEM_BG",
+        "latestValue": "GxEPD_WHITE",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "THEME_COLOR_ITEM_HL",
+        "latestValue": "GxEPD_BLACK",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "THEME_COLOR_ITEM_EX",
+        "latestValue": "GxEPD_BLACK",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "THEME_COLOR_TITLE_FG",
+        "latestValue": "GxEPD_WHITE",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "THEME_COLOR_TITLE_BG",
+        "latestValue": "GxEPD_BLACK",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "THEME_COLOR_TITLE_HL",
+        "latestValue": "GxEPD_WHITE",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "THEME_COLOR_TITLE_EX",
+        "latestValue": "GxEPD_WHITE",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "THEME_SELECTED_BG",
+        "latestValue": "GxEPD_BLACK",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "THEME_SELECTED_FG",
+        "latestValue": "GxEPD_WHITE",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "UNO_OR_FULL",
+        "latestValue": "unoLcd",
+        "subsystem": "DISPLAY"
+      },
+      {
+        "name": "THEME_ACTION_ROUND_CORNER",
+        "latestValue": "0",
+        "subsystem": "THEME"
+      },
+      {
+        "name": "THEME_TITLE_ROUND_CORNER",
+        "latestValue": "4",
+        "subsystem": "THEME"
+      }
+    ],
+    "namingRecursive": false,
+    "useCppMain": false,
+    "saveLocation": "ONE_SINGLE_FILE_MENU_MAIN",
+    "useDynamicMenus": true,
+    "usingSizedEEPROMStorage": false,
+    "eepromSaveMode": "LEGACY_WRITE_BY_POSITION",
+    "eepromDefinition": "prefs:menuStore:512",
+    "authenticatorDefinition": "rom:200:4",
+    "projectIoExpanders": [
+      "deviceIO:"
+    ],
+    "menuInMenuCollection": {
+      "menuDefinitions": []
+    }
+  },
+  "stringLists": []
+}
